@@ -15,7 +15,7 @@
         $comment = htmlspecialchars($_POST['comment']);
         $file = $_FILES['img_url'];
         $user_id = $_SESSION['id'];
-
+        var_dump($user_id);
         if ($file['size'] <= 1000000) {
             $valid_ext = ['jpg', 'jpeg', 'png', 'gif'];
             $check_ext = strtolower(substr(strrchr($file['name'], '.'), 1));
@@ -39,7 +39,12 @@
                     $sth->bindValue(':description', $description);
                     $sth->bindValue(':author_article', $user_id);
                     $sth->bindValue(':img', $img_name);
-
+                    //var_dump($name);
+                    //var_dump($color);
+                    //var_dump($country);
+                    //var_dump($alchool);
+                    //var_dump($description);
+                    // var_dump($author_article);
                     $sth->execute();
 
                     $lastId = $db->lastInsertId();
@@ -50,7 +55,7 @@
                     $sth2->bindValue(':rate', $rate);
                     $sth2->bindValue(':comment', $comment);
 
-                    $sth->execute();
+                    $sth2->execute();
 
                     echo "<div class ='alert-success'> Bière enregistrée :)</div><br>";
                 }
