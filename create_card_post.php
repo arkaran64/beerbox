@@ -8,10 +8,11 @@
     if (isset($_POST['submit'])) {
         $name = htmlspecialchars($_POST['name']);
         $color = htmlspecialchars($_POST['color']);
-        $type = htmlspecialchars($_POST['type']);
         $country = htmlspecialchars($_POST['country']);
+        $alchool = htmlspecialchars($_POST['alchool']);
         $description = htmlspecialchars($_POST['description']);
         $rate = htmlspecialchars($_POST['rate']);
+        $comment = htmlspecialchars($_POST['comment']);
         $file = $_FILES['img_url'];
         $user_id = $_SESSION['id'];
 
@@ -26,12 +27,15 @@
                 $move_result = move_uploaded_file($file['tmp_name'], $upload_name);
 
                 if ($move_result) {
-                    $sth = $db->prepare(' INSERT INTO bieres (name, type, country, description, author_article, img) 
-                    VALUES (:name, :type, :country, :description, :author_article, :img)');
+                    $sth = $db->prepare(' INSERT INTO beers (name, alchoolpercent, description, author_article, img) 
+                    VALUES (:name, :alchoolpercent, :description, :author_article, :img),
+                    INSERT INTO color (type) VALUES (:type), 
+                    INSERT INTO country (country) VALUES (:country),');
 
                     $sth->bindValue(':name', $name);
-                    $sth->bindValue(':type', $type);
+                    $sth->bindValue(':color', $color);
                     $sth->bindValue(':country', $country);
+                    $sth->bindValue(':alchoolpercent', $alchool);
                     $sth->bindValue(':description', $description);
                     $sth->bindValue(':author_article', $user_id);
                     $sth->bindValue(':img', $img_name);
@@ -40,18 +44,18 @@
 
                     $lastId = $db->lastInsertId();
 
-                    $sth2 = $db->prepare('INSERT INTO couleur (id_beer, couleur) VALUES (:id_beer, :couleur), INSERT INTO note (id_user, id_beer, note) VALUES (:id_user, :id_beer, :note)');
+                    $sth2 = $db->prepare('INSERT INTO rating (id_user, id_beer, rate, comment) VALUES (:id_user, :id_beer, :rate, :comment) ');
 
                     $sth2->bindValue(':id_beer', $lastId);
-                    $sth2->bindValue(':couleur', $color);
-                    $sth2->bindValue(':note', $rate);
+                    $sth2->bindValue(':rate', $rate);
+                    $sth2->bindValue(':comment', $comment);
 
                     $sth->execute();
 
-                    echo "<div class ='col-12 alert alert-success text-center'> Bière enregistrée :)</div><br>";
+                    echo "<div class ='alert-success'> Bière enregistrée :)</div><br>";
                 }
             }
         }
     } else {
-        echo "<div class ='col-10 alert alert-alert text-center'> une erreur s'est produite, veuillez recommencer la saisie.  </div>";
+        echo "<div class ='alert-alert'> une erreur s'est produite, veuillez recommencer la saisie.  </div>";
     }

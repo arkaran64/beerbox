@@ -10,19 +10,18 @@ include 'assets/nav.php';
 
 <!-- Liste des Bieres -->
 <section id="beers_list">
-    <div id="wrapper">
-        <div class="wrapper-holder">
-            <header id="header">
-                <h2 class="title">Liste des bières:</h2>
-            </header>
+    <div class="product-filter">
+        <h2>Liste des bières</h>
 
-            <div class="products">
-                <?php
+
+    </div>
+    <div class="products">
+        <?php
                         displayAllBeers();
                     ?>
 
-            </div>
-        </div>
+    </div>
+    </div>
     </div>
 </section>
 

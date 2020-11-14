@@ -217,8 +217,35 @@ section {
     margin-bottom: 40px;
 }
 
+/*-------------------------------------- Slider --------------------------------------*/
 
+#slider{
+    
+}
+.wrapper{
+    width:100%;
+    padding-top: 20px;
+    text-align:center;
+  }
+  h2{
+    color:#000;
+  }
+  .slick{
+    width:90%;
+    margin:0px auto;
+    display: flex;
+    flex-direction:row;
 
+  }
+  .slick-slide{
+    margin:10px;
+  }
+  .slick-slide img{
+    width:150px;
+    height: 450px;
+    border: 2px solid #fff;
+  }
+  
 
 
 /*-------------------------------------- Footer --------------------------------------*/
@@ -252,117 +279,67 @@ footer {
 
 #beers_list {
     min-height: 165vh;
-    background-color: #000;
+    background: url(../img/lgbg3.jpg) no-repeat;
+    background-size: cover;
 }
 
-#wrapper{
-	width:100%;
-	height: 100%;
-    display:table;
-    background-color: #fff;
-    background-size: cover;    
-}
 
-.wrapper-holder {
-	width:100%;
-    display:table-row;
-}
+/* Typography */
 
-#header {
-	max-width: 100%;
-	margin: 0 auto;
-	padding: 45px 155px 40px;
-    position:relative;
-    background-color: #000; 
+h2 {
+	font-size: 28px;
+	font-weight: 300;
+	flex: 1;
 }
-
-#header .title {
-   
-    font-size: 3em;
-    color: #fff;
-    text-decoration:  underline 5px solid #B989A8;
-    margin-bottom: 50px;
-    padding: 13px 0;    
-}
-
-#main {
-	max-width: 1170px;
-	margin: 0 auto;
-	overflow: hidden;
-	position: relative;
-}
-
-.bar {
-	width: 100%;
-	margin: 0 0 10px;
-	background: #000;
-}
-
-.bar-frame {
-	max-width: 1170px;
-	margin: 0 auto;
-	padding: 20px 20px;
-}
-
-.breadcrumbs {
-	width:100%;
-	overflow: hidden;
-}
-.breadcrumbs li {
-	float: left;
-	padding: 0 20px 0 30px;
-	color: #fff;
-	text-transform: uppercase;	
-	background: url(../img/ico_arrows.png) no-repeat 0 50%;
-}
-.breadcrumbs li:first-child {
-	background: none;
-	padding: 0 20px 0 0;
-}
-.breadcrumbs a {
-	color: #a5a5a5;
-}  
 
 h5 {
-    font-family: "Ubuntu-Bold";
-    font-size: larger;
-    line-height: 1.7em;
+	font-weight: 500;
+	line-height: 1.7em;
 }
 
 h6 {
-    color: #000;
-    font-size: large;
+	color: #666;
+	font-size: 14px;
+}
+
+/* Product Layout */
+
+label {
+	color: #666;
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 2em;
+	text-transform: uppercase;
 }
 
 .products {
-    display: flex;
+	display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .product-card {
     display: flex;
     flex-direction: column;
-    width: 20%;
-    max-width: 20%;
-    height: auto;
-    padding: 2%;
-    flex-grow: 1;
-    flex-basis: 16%;
-    background-color: #FFF;
-    border-radius: 6px;
-    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.25);
-    margin:1%;
+	max-width: 200px;
+	padding: 2%;
+	flex: 1;
+	
+	background-color: #FFF;
+	box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.25);
 }
 
 .product-image img {
-    width: 100%;
+    width: 150px;
+    height: 450px;
 }
 
 .product-info {
-    margin-top: auto;
-    padding-top: 20px;
-    text-align: center;
+	margin-top: auto;
+	padding-top: 20px;
+	text-align: center;
 }
+
 
 .card-body button{
     margin-top: 5%;
@@ -787,13 +764,13 @@ h6 {
 }
 /*-------------------------------------- edit_beer page & form--------------------------------------*/
 
-#edit_beer {
+#edit_card {
     height: 100vh;
     background: url(../img/lgbg3.jpg) no-repeat;
     background-size: cover;
 }
 
-#edit_beer .form-box {
+#edit_card .form-box {
     width: 30%;
     padding: 3%;
     position: absolute;
@@ -805,7 +782,7 @@ h6 {
     border-radius: 10px;
 }
 
-#edit_beer .textbox h2 {
+#edit_card .textbox h2 {
     float: left;
     font-size: 2.5em;
     border-bottom: 6px solid #B989A8;
@@ -813,7 +790,7 @@ h6 {
     padding: 13px 0;
 }
 
-#edit_beer .textbox {
+#edit_card .textbox {
     width: 100%;
     overflow: hidden;
     font-size: 20px;
@@ -822,13 +799,13 @@ h6 {
     border-bottom: 1px solid #35252f;
 }
 
-#edit_beer .textbox i {
+#edit_card .textbox i {
     width: 26px;
     float: left;
     text-align: center;
 }
 
-#edit_beer .textbox input {
+#edit_card .textbox input {
     border: none;
     outline: none;
     background: none;
@@ -839,7 +816,7 @@ h6 {
     margin: 0 10px;
 }
 
-#edit_beer .btn {
+#edit_card .btn {
     width: 100%;
     background: #F917AC;
     border: 2px solid #F917AC;
@@ -852,7 +829,7 @@ h6 {
 
 }
 
-#edit_beer .back {
+#edit_card .back {
     width: 100%;
     background: #F917AC;
     border: 2px solid #F917AC;

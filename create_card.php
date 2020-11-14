@@ -24,17 +24,42 @@ if (isset($_GET['e']) && '1' == $_GET['e']) {
             <h2>Ajouter une bière</h2>
             <div class="textbox">
                 <i class="fas fa-wine-bottle"></i>
-                <input type="text" class="form-control" name="name" id="name" placeholder="name">
+                <input type="text" class="form-control" name="name" id="name" placeholder="nom">
             </div>
 
             <div class="textbox">
                 <i class="fas fa-tint"></i>
-                <input type="text" class="form-control" name="type" id="type" placeholder="type">
+                <select name="color" id="color">
+                    <option value="">--Choisir une option--</option>
+                    <option value="1">Blonde</option>
+                    <option value="2">Blanche</option>
+                    <option value="3">Rousse</option>
+                    <option value="4">Brune</option>
+                    <option value="5">IPA</option>
+                </select>
             </div>
 
             <div class="textbox">
                 <i class="far fa-flag"></i>
-                <input type="text" class="form-control" name="country" id="country" placeholder="country">
+                <select name="country" id="country">
+                    <option value="">--Choisir un pays--</option>
+                    <option value="1">Allemagne</option>
+                    <option value="2">Belgique</option>
+                    <option value="3">Espagne</option>
+                    <option value="4">Etats-Unis</option>
+                    <option value="5">France</option>
+                    <option value="6">Irlande</option>
+                    <option value="7">Mexique</option>
+                    <option value="8">Pays-Bas</option>
+                    <option value="9">Japon</option>
+                    <option value="10">Royaume-Uni</option>
+
+                </select>
+            </div>
+
+            <div class="textbox">
+                <i class="fas fa-percent"></i>
+                <input type="text" class="form-control" id="alchool_edit" name="alchool" placeholder="Taux d'alchool">
             </div>
 
             <div class="textbox">
@@ -45,17 +70,17 @@ if (isset($_GET['e']) && '1' == $_GET['e']) {
 
             <div class="textbox">
                 <i class="far fa-file-image"></i>
-                <input type="file" name="img_url" id="img_url" accept=".png,.jpeg,.jpg,.gif">
+                <input type="file" name="img_url" id="img_url" accept=".png,.jpeg,.jpg,.gif" placeholder="image">
             </div>
 
             <div class="textbox">
                 <i class="fab fa-ravelry"></i>
-                <input type="text" class="form-control" name="rate" id="rate" placeholder="rate">
+                <input type="text" class="form-control" name="rate" id="rate" placeholder="note /10">
             </div>
 
             <div class="textbox">
                 <i class="fas fa-comment"></i>
-                <input type="text" class="form-control" name="comment" id="comment" placeholder="comment">
+                <input type="text" class="form-control" name="comment" id="comment" placeholder="commentaire">
             </div>
 
             <div class="textbox">

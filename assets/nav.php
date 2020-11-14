@@ -10,7 +10,6 @@
     </button>
     <div class="navbar-menu">
       <a href="index.php#home">Accueil</a>
-      <a href="index.php#about">Beerbox?</a>
       <a href="beer_list.php">Liste des bieres</a>
       <?php
                 if (empty($_SESSION)) {

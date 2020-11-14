@@ -75,8 +75,6 @@ function displayAllBeers()
     <div class="product-info">
         <h5 class="card-title"><?php echo $row['name']; ?>
         </h5>
-        <h6><?php echo $row['country']; ?>
-        </h6>
     </div>
     <br>
 
@@ -84,9 +82,6 @@ function displayAllBeers()
         href="card.php?id=<?php echo $row['id']; ?>"
         class="card-link">Voir</a>
 </div>
-</div>
-
-
 
 <?php
     }
@@ -94,8 +89,7 @@ function displayAllBeers()
 function displayBeer($id)
 {
     global $db;
-    $sql = $db->query("SELECT * FROM beers AS b LEFT JOIN color AS c ON c.id_beer=b.id 
-   WHERE b.id = {$id}");
+    $sql = $db->query("SELECT * FROM beers INNER JOIN color ON beers.id_color = color.id INNER JOIN country ON beers.id_country = country.id  WHERE beers.id = {$id}");
     $sql->setFetchMode(PDO::FETCH_ASSOC);
 
     while ($row = $sql->fetch()) {
@@ -136,7 +130,7 @@ function displayBeer($id)
 function displayRate($id)
 {
     global $db;
-    $sql = $db->query("SELECT * FROM beers AS b LEFT JOIN rating AS r ON r.id_beer=b.id  WHERE b.id = {$id}");
+    $sql = $db->query("SELECT * FROM beers LEFT JOIN rating  ON beers.id = rating.id_beer WHERE beers.id = {$id}");
     $sql->setFetchMode(PDO::FETCH_ASSOC);
 
     while ($row = $sql->fetch()) {
@@ -158,7 +152,7 @@ function displayRate($id)
 function displayAllBeersByUser($user_id)
 {
     global $db;
-    $sql = $db->query("SELECT * FROM beers AS b LEFT JOIN color AS c ON c.id_beer=b.id WHERE b.author_article = {$user_id}");
+    $sql = $db->query("SELECT * FROM beers LEFT JOIN color ON beers.id_color = color.id LEFT JOIN country ON beers.id_country = country.id  WHERE beers.author_article = {$user_id}");
     $sql->setFetchMode(PDO::FETCH_ASSOC); ?>
 <table class="table">
     <thead class="thead-light">
@@ -203,4 +197,23 @@ function displayAllBeersByUser($user_id)
     </tbody>
 </table>
 <?php
+}
+
+function displayRandomPics()
+{
+    global $db;
+    $sql = $db->query('SELECT * FROM beers ORDER BY RAND() LIMIT 3');
+    $sql->setFetchMode(PDO::FETCH_ASSOC);
+
+    while ($row = $sql->fetch()) {
+        ?>
+<div class="card">
+    <img class="slide-img"
+        src="assets/uploads/<?php echo $row['img']; ?>">
+    <h3><?php echo $row['name']; ?>
+    </h3>
+</div>
+
+<?php
+    }
 }

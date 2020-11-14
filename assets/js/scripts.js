@@ -21,8 +21,16 @@ $(document).ready(function () {
 });
 
 
-
-
-
+//slider            
+  $(".slider").slick({
+      slidesToShow: 3,
+      dots: true,
+      arrows: true,
+      autoplay: true,
+      autoplayspeed: 1000,
+      centerMode: true,
+     
+    });
+   
 
 
