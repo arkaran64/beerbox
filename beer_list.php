@@ -15,15 +15,7 @@ include 'assets/nav.php';
             <header id="header">
                 <h2 class="title">Liste des bières:</h2>
             </header>
-            <hr>
-            <div class="bar">
-                <div class="bar-frame">
-                    <ul class="breadcrumbs">
-                        <li><a href="index.php">Accueil</a></li>
-                        <li><a href="beer_list.php">Liste des bieres</a></li>
-                    </ul>
-                </div>
-            </div>
+
             <div class="products">
                 <?php
                         displayAllBeers();

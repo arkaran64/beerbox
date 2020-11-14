@@ -9,7 +9,7 @@ $user_id = $_SESSION['id'];
 
 
 <section class="my_beers">
-    <h2 class="section-title">Mes vins :</h2>
+    <h2 class="section-title">Mes bières :</h2>
 
     <div class="content">
         <?php echo

@@ -9,16 +9,19 @@ $id = $_GET['id'];
 ?>
 
 <section id="beer_card">
-    <div id="wrapper">
-        <div class="wrapper-holder">
 
+    <div class="content">
+
+        <div class="card">
             <?php
         displayBeer($id);
+
     ?>
         </div>
-    </div>
-</section>
 
+    </div>
+    <a class="btn" href="beer_list.php" class="card-link">Retour</a>
+</section>
 
 
 <?php require 'assets/footer.php';

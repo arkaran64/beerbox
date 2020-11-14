@@ -380,10 +380,100 @@ h6 {
 
 /*-------------------------------------- beer_card page  --------------------------------------*/
 #beer_card {
-    height: 100vh;
-    background: url(../img/lgbg2.jpg) no-repeat;
+  
+    background: url(../img/lgbg3.jpg) no-repeat;
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
+#beer_card .content {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;   
+}
+
+.card {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;   
+    box-shadow: 0 0 8px #000;
+    border-radius: 20px;
+}
+
+.card .left-column {
+    width:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.card .left-column img {
+    width: 100px;
+    height: 350px;
+    transition: 0.3s ease;
+}
+
+.card .right-column {
+    width: 50%;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 1rem;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background: black;
+    color:white;
+}
+
+.card .right-column .product-name {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.card .right-column .product-name h2 {
+    font-size: 2vw;
+    text-decoration: underline #885c7e;
+    margin-bottom: 5%;
+}
+
+.card .right-column .infos  h3 {
+    font-size: 2em;
+    margin-top: 5%;
+    justify-content: space-around;
+}
+.card .right-column .infos  h4 {
+    font-size: 1.5em;
+    text-decoration: underline #885c7e;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.card .right-column p {
+    font-size: 1em;
+}
+
+#card .btn {
+    align-items: center;
+    background-color: #F917AC;
+    color: #fff;  
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;    
+    padding: 15px;
+    border-radius: 6px;      
+}
+
+#card .right-column .btn:hover {
+    box-shadow: 0 0 6px #000;
+}
+
 
 
 
@@ -405,6 +495,9 @@ h6 {
     color: white;
     background-color: #000;
     border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+
 }
 
 #login .login-box h2 {
