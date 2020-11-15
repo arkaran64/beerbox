@@ -20,6 +20,7 @@
 
         $sth->execute();
 
+        header('Location:profile.php?useredit');
         echo '<div class="alert">Votre compte a bien été mis à jour!</div>';
     } else {
         echo '<div class="alert">Erreur de mise à jour!</div>';

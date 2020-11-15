@@ -15,15 +15,34 @@ $sth = $db->prepare("SELECT * FROM users WHERE id = {$user_id}
 
 $sth->execute();
 
-$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+$data = $sth->fetch(PDO::FETCH_ASSOC);
 
-foreach ($result as $userData => $data) {
-    ?>
+?>
 <section id="edit_user">
     <?php
        if (isset($_GET['signup'])) {
            $message = 'Vous bien enrgistré.';
            echo "<div'> ".$message.' </p>';
+       } elseif (isset($_GET['delete'])) {
+           echo '<div class="alert alert-success
+        ">
+                <p> Article supprimé!</p>                    
+             </div>';
+       } elseif (isset($_GET['edit'])) {
+           echo '<div class="alert alert-success
+        ">
+                <p> Article modifié</p>                    
+             </div>';
+       } elseif (isset($_GET['useredit'])) {
+           echo '<div class="alert alert-success
+        ">
+                <p> Vous avez modifié vos infos avec succès !</p>                    
+             </div>';
+       } elseif (isset($_GET['deleterate'])) {
+           echo '<div class="alert alert-success
+        ">
+                <p> Votre commentaire/note a bien été supprimée ! !</p>                    
+             </div>';
        } ?>
 
     <div class="edit-page">
@@ -35,6 +54,11 @@ foreach ($result as $userData => $data) {
 
             <div class="item">
                 <a href="my_beers.php" class="btn ">Voir mes bières <span class="badge badge-primary badge-pill"></span>
+                </a>
+            </div>
+            <div class="item">
+                <a href="my_ratings.php" class="btn ">Voir mes commentaires <span
+                        class="badge badge-primary badge-pill"></span>
                 </a>
             </div>
 
@@ -93,8 +117,6 @@ foreach ($result as $userData => $data) {
                 </div>
 
             </form>
-            <?php
-}  ?>
             <br>
             <div class="back">
                 <a class="btn-back" href="index.php">Retour</a>

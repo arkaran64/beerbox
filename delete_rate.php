@@ -4,13 +4,13 @@
     require 'assets/head.php';
     include 'assets/nav.php';
     $user_id = $_SESSION['id'];
-    $beer_id = ($_GET['id']);
+    $rate_id = ($_GET['id']);
 
     //requete de suppression
-            $sth = $db->prepare("DELETE FROM beers WHERE id =  {$beer_id}");
+$sth = $db->prepare("DELETE FROM rating WHERE rating_id =  {$rate_id} AND id_users = {$user_id}");
             $sth->execute();
 
-            header('Location:profile.php?delete');
+            header('Location:profile.php?deleterate');
 
 ?>
 
