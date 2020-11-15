@@ -47,8 +47,12 @@ function displayAllUsers()
         </td>
         <td><?php echo $row['user_address']; ?>
         </td>
-        <td><a
-                href="delete_users.php?id=<?php echo $row['id']; ?>">Supprimer</a>
+        <td>
+            <form action="delete_users.php" method="post">
+                <input type="hidden" name="id"
+                    value="<?php echo $row['id']; ?>">
+                <button type="submit" name="sub_delete">Supprimer</button>
+            </form>
         </td>
         </tr>
         <?php
@@ -89,7 +93,7 @@ function displayAllBeers()
 function displayBeer($id)
 {
     global $db;
-    $sql = $db->query("SELECT * FROM beers INNER JOIN color ON beers.id_color = color.id INNER JOIN country ON beers.id_country = country.id  WHERE beers.id = {$id}");
+    $sql = $db->query("SELECT * FROM beers INNER JOIN color ON beers.id_color = color.color_id INNER JOIN country ON beers.id_country = country.country_id  WHERE beers.id = {$id}");
     $sql->setFetchMode(PDO::FETCH_ASSOC);
 
     while ($row = $sql->fetch()) {
@@ -107,13 +111,13 @@ function displayBeer($id)
     </div>
     <br>
     <div class="infos">
-        <h2>Type: <?php echo $row['type']; ?>
+        <h2>Type: <?php echo $row['color_name']; ?>
         </h2>
         <br>
         <h2>Taux d'alchool : <?php echo $row['alchoolpercent']; ?>
         </h2>
         <br>
-        <h2>Origine : <?php echo $row['country']; ?>
+        <h2>Origine : <?php echo $row['country_name']; ?>
         </h2>
         <br>
         <h4>Description: </h4>
@@ -152,7 +156,7 @@ function displayRate($id)
 function displayAllBeersByUser($user_id)
 {
     global $db;
-    $sql = $db->query("SELECT * FROM beers LEFT JOIN color ON beers.id_color = color.id LEFT JOIN country ON beers.id_country = country.id  WHERE beers.author_article = {$user_id}");
+    $sql = $db->query("SELECT * FROM beers LEFT JOIN color ON beers.id_color = color.color_id LEFT JOIN country ON beers.id_country = country.country_id  WHERE beers.author_article = {$user_id}");
     $sql->setFetchMode(PDO::FETCH_ASSOC); ?>
 <table class="table">
     <thead class="thead-light">
@@ -177,11 +181,11 @@ function displayAllBeersByUser($user_id)
         </td>
         <td><?php echo $row['name']; ?>
         </td>
-        <td><?php echo $row['type']; ?>
+        <td><?php echo $row['color_name']; ?>
         </td>
         <td><?php echo $row['alchoolpercent']; ?>
         </td>
-        <td><?php echo $row['country']; ?>
+        <td><?php echo $row['country_name']; ?>
         </td>
         <td><?php echo $row['description']; ?>
         </td>
@@ -189,7 +193,47 @@ function displayAllBeersByUser($user_id)
                 href="edit_card.php?id=<?php echo $row['id']; ?>">Modifier</a>
         </td>
         <td><a
-                href="delete_article.php?id=<?php echo $row['id']; ?>">Supprimer</a>
+                href="delete_card.php?id=<?php echo $row['id']; ?>">Supprimer</a>
+        </td>
+
+        <?php
+            } ?>
+    </tbody>
+</table>
+<?php
+}
+function displayAllRatingsByUser($user_id)
+{
+    global $db;
+    $sql = $db->query("SELECT * FROM rating LEFT JOIN beers ON beers.id = rating.id_beer WHERE rating.id_users = {$user_id}");
+    $sql->setFetchMode(PDO::FETCH_ASSOC); ?>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Note</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">Bière</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            while ($row = $sql->fetch()) {
+                ?>
+        <tr id="row-<?php echo $row['id']; ?>">
+        </tr>
+        <td scope="row"><?php echo $row['rating_id']; ?>
+        </td>
+        <td><?php echo $row['rate']; ?>
+        </td>
+        <td><?php echo $row['comment']; ?>
+        </td>
+        <td><a
+                href="card.php?id=<?php echo $row['id_beer']; ?>"><?php echo $row['name']; ?></a>
+        </td>
+        <td><a
+                href="delete_rate.php?id=<?php echo $row['rating_id']; ?>">Supprimer</a>
         </td>
 
         <?php
@@ -209,11 +253,33 @@ function displayRandomPics()
         ?>
 <div class="card">
     <img class="slide-img"
-        src="assets/uploads/<?php echo $row['img']; ?>">
-    <h3><?php echo $row['name']; ?>
+        src="assets/uploads/<?php echo $row['img']; ?>"
+        height=400px width=auto>
+    <h3 class="dark-text"><?php echo $row['name']; ?>
     </h3>
 </div>
 
 <?php
     }
+}
+
+function displayRating($id)
+{
+    global $db;
+    $sql = $db->query("SELECT r.*,b.id,u.firstname,u.lastname FROM rating AS r LEFT JOIN beers AS b ON r.id_beer = b.id LEFT JOIN users AS u ON r.id_users = u.id WHERE b.id = {$id}");
+    $sql->setFetchMode(PDO::FETCH_ASSOC);
+
+    $rating = $sql->fetchAll();
+
+    foreach ($rating as $rate) {?>
+<div class="rating">
+    <h4><?php echo $rate['rate']; ?>
+    </h4>
+    <p><?php echo $rate['comment']; ?>
+    </p>
+    <small><?php echo $rate['lastname']; ?>
+        <?php echo $rate['firstname']; ?></small>
+</div>
+<?php
+}
 }

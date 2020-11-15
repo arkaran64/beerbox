@@ -13,7 +13,7 @@ $user_id = $_SESSION['id'];
 
     <div class="content">
         <?php echo
-            displayAllBeersByUser($user_id);
+            displayAllRatingsByUser($user_id);
         ?>
     </div>
     <div>

@@ -11,9 +11,12 @@ include 'assets/nav.php';
         <div class="content">
             <div class="mainTitle">
                 <h1><span>BeerBox</span></h1>
-                <div class="button">
+                <?php echo empty($_SESSION['id']) ? '<div class="button">
                     <a href="login.php">Login</a>
-                </div>
+                </div>' : ''; ?>
+                <!-- <div class="button">
+                    <a href="login.php">Login</a>
+                </div> -->
             </div>
         </div>
     </section>
@@ -40,13 +43,12 @@ include 'assets/nav.php';
 
     <section id="slider">
         <div class="wrapper">
-            <h2>Decouvrez certaines de nos bieres<h2>
-                    <p></p>
-                    <div class="slick">
-                        <?php
-                        displayRandomPics();
-                        ?>
-                    </div>
+            <h2>Decouvrez certaines de nos bieres</h2>
+            <div class="slick">
+                <?php
+        displayRandomPics();
+        ?>
+            </div>
 
         </div>
     </section>

@@ -7,14 +7,16 @@ $beer_id = ($_GET['id']);
 $user_id = $_SESSION['id'];
 
 // Requete de selection
-$sth = $db->prepare("SELECT * FROM beers LEFT JOIN color on beers.id = color.id WHERE id = {$beer_id}");
+$sql1 = $db->query("SELECT * FROM beers LEFT JOIN color on beers.id_color = color.color_id LEFT JOIN country ON beers.id_country = country.country_id WHERE beers.id = {$beer_id}");
 //$sth2 = $db->prepare("SELECT * FROM beers LEFT JOIN rating AS r ON r.id_beer=b.id WHERE id = {$beer_id}");
-$sth->execute();
-//$sth2->execute();
+$beer = $sql1->fetch(PDO::FETCH_ASSOC);
 
-while ($data = $sth->fetch()) {
-    ?>
+$sql2 = $db->query('SELECT * FROM color');
+$color = $sql2->fetchAll(PDO::FETCH_ASSOC);
 
+$sql3 = $db->query('SELECT * FROM country');
+$country = $sql3->fetchAll(PDO::FETCH_ASSOC);
+?>
 <section id="edit_card">
     <div class="form-box">
         <form class="edit_card-form" action="edit_card_post.php" method="POST" enctype="multipart/form-data"
@@ -22,35 +24,41 @@ while ($data = $sth->fetch()) {
             <h2>Modifier:</h2>
             <div class="textbox">
                 <i class="fas fa-wine-bottle"></i>
-                <input type="text" class="form-control" name="name" id="name" placeholder="name">
+                <input type="text" class="form-control" name="name" id="name"
+                    value="<?php echo $beer['name']; ?>">
             </div>
 
             <div class="textbox">
                 <i class="fas fa-tint"></i>
                 <select name="type" id="type">
-                    <option value="">--Choisir une option--</option>
-                    <option value="1">Blonde</option>
-                    <option value="2">Blanche</option>
-                    <option value="3">Rousse</option>
-                    <option value="4">Brune</option>
-                    <option value="5">IPA</option>
+                    <option
+                        value="<?php echo $beer['id_color']; ?>"
+                        selected>
+                        -- <?php echo $beer['color_name']; ?>
+                        --
+                    </option>
+                    <?php foreach ($color as $c) { ?>
+                    <option
+                        value=" <?php echo $c['color_id']; ?>">
+                        <?php echo $c['color_name']; ?>
+                    </option>
+                    <?php } ?>
                 </select>
             </div>
 
             <div class="textbox">
                 <i class="far fa-flag"></i>
                 <select name="country" id="country">
-                    <option value="">--Choisir un pays--</option>
-                    <option value="1">Allemagne</option>
-                    <option value="2">Belgique</option>
-                    <option value="3">Espagne</option>
-                    <option value="4">Etats-Unis</option>
-                    <option value="5">France</option>
-                    <option value="6">Irlande</option>
-                    <option value="7">Mexique</option>
-                    <option value="8">Pays-Bas</option>
-                    <option value="9">Japon</option>
-                    <option value="10">Royaume-Uni</option>
+                    <option
+                        value="<?php echo $beer['id_country']; ?>">
+                        --<?php echo $beer['country_name']; ?>--
+                    </option>
+                    <?php foreach ($color as $c) { ?>
+                    <option
+                        value=" <?php echo $c['color_id']; ?>">
+                        <?php echo $c['color_name']; ?>
+                    </option>
+                    <?php } ?>
 
                 </select>
             </div>
@@ -58,13 +66,14 @@ while ($data = $sth->fetch()) {
             <div class="textbox">
                 <i class="fas fa-percent"></i>
                 <input type="text" class="form-control" id="alchool_edit" name="alchool"
-                    value="<?php echo $data['alchoolpercent']; ?>">
+                    value="<?php echo $beer['alchoolpercent']; ?>">
             </div>
 
             <div class="textbox">
                 <i class="far fa-file-alt"></i>
                 <textarea class="form-control" name="description" rows="3" placeholder="Description" id="description"
-                    required placeholder="description"></textarea>
+                    required
+                    placeholder="description"><?php echo $beer['description']; ?></textarea>
             </div>
 
             <div class="textbox">
@@ -101,6 +110,5 @@ while ($data = $sth->fetch()) {
 
 
 <?php
-}
 
 require 'assets/footer.php';
